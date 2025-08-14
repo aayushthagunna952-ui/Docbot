@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Doc Bot Chat - Your AI Medical Assistant</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="shortcut icon" href="favicon.png" type="image/x-icon">
+    <link rel="stylesheet" href="bot.css">
+    <script src="bot.js"></script>
+
+</head>
+
+<body>
+
+    <!-- Loader Screen -->
+    <div class="loader-container" id="loader">
+        <div class="loader-content">
+            <div class="loader-icon-container">
+                <div class="loader-icon">
+                    <i class="fas fa-stethoscope spin-animation"></i>
+                </div>
+                <div class="loader-pulse"></div>
+            </div>
+            <h1 class="loader-title">Doctor AI Assistant</h1>
+            <p class="loader-subtitle">Initializing your personal healthcare companion...</p>
+
+            <!-- Feature Points -->
+            <div class="loader-features">
+                <div class="loader-feature">
+                    <div class="loader-feature-dot"></div>
+                    <span>AI-powered medical assistance</span>
+                </div>
+                <div class="loader-feature">
+                    <div class="loader-feature-dot"></div>
+                    <span>Symptom analysis & guidance</span>
+                </div>
+                <div class="loader-feature">
+                    <div class="loader-feature-dot"></div>
+                    <span>24/7 healthcare support</span>
+                </div>
+            </div>
+
+            <div class="loader-progress">
+                <div class="loader-progress-bar" id="loaderProgressBar"></div>
+            </div>
+            <div class="loader-dots">
+                <div class="loader-dot"></div>
+                <div class="loader-dot"></div>
+                <div class="loader-dot"></div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="chat-container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="sidebar-header">
+                <div class="logo">
+                    <div class="logo-icon">
+                        <i class="fa-solid fa-user-doctor"></i>
+                    </div>
+                    <div class="logo-text">Doc Bot</div>
+                </div>
+                <div class="user-info">
+                    <div class="user-avatar"><img src="favicon.png" alt="" width="50px" height="50px"></div>
+                    <div>Medical Assistant</div>
+                </div>
+            </div>
+
+            <div class="chat-history">
+                <div class="history-title">Recent Conversations</div>
+                <div class="history-item">Language Models Discussion</div>
+                <div class="history-item">AI in Healthcare</div>
+                <div class="history-item">Medical Diagnosis Help</div>
+            </div>
+
+            <div class="sidebar-footer">
+                <button class="new-chat-btn" onclick="startNewChat()">+ New Chat</button>
+            </div>
+        </div>
+
+        <!-- Main Chat Area -->
+        <div class="main-chat">
+            <div class="chat-header">
+                <div class="chat-title">AI Medical Assistant</div>
+                <div class="status-indicator">
+                    <div class="status-dot"></div>
+                    <span>Online</span>
+                </div>
+            </div>
+
+            <div class="messages-container" id="messagesContainer">
+                <div class="welcome-message">
+                    <div class="welcome-icon">
+                        <i class="fa-solid fa-user-doctor"></i>
+                    </div>
+                    <div class="welcome-title">Welcome to Doc Bot</div>
+                    <div class="welcome-subtitle">Your interactive medical assistant. I'll ask questions to better
+                        understand your health concerns before providing personalized advice.</div>
+                    <div class="conversation-starters">
+                        <div class="starter-title">Try asking about:</div>
+                        <div class="starter-buttons">
+                            <button class="starter-btn" onclick="startConversation('I have a headache')">💊
+                                Symptoms</button>
+                            <button class="starter-btn" onclick="startConversation('I want to improve my health')">🏃
+                                Wellness</button>
+                            <button class="starter-btn"
+                                onclick="startConversation('I have questions about medication')">💉 Medications</button>
+                            <button class="starter-btn" onclick="startConversation('I need lifestyle advice')">🥗
+                                Lifestyle</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="typing-indicator" id="typingIndicator">
+                    <div class="message-avatar">
+                        <div
+                            style="width: 40px; height: 40px; background: linear-gradient(135deg, #27ae60 0%, #2ecc71 100%); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-weight: 700; font-size: 0.9rem;">
+                            DR</div>
+                    </div>
+                    <div class="typing-dots">
+                        <div class="typing-dot"></div>
+                        <div class="typing-dot"></div>
+                        <div class="typing-dot"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="input-container">
+                <div class="input-wrapper">
+                    <textarea class="message-input" id="messageInput"
+                        placeholder="Ask me about medical symptoms, conditions, or health advice..."
+                        rows="1"></textarea>
+                    <button class="send-btn" id="sendBtn" onclick="sendMessage()">
+                        <i class="fa-solid fa-paper-plane"></i>
+
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script>(function () { function c() { var b = a.contentDocument || a.contentWindow.document; if (b) { var d = b.createElement('script'); d.innerHTML = "window.__CF$cv$params={r:'96e66b7351004e25',t:'MTc1NTA2OTMxMC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);"; b.getElementsByTagName('head')[0].appendChild(d) } } if (document.body) { var a = document.createElement('iframe'); a.height = 1; a.width = 1; a.style.position = 'absolute'; a.style.top = 0; a.style.left = 0; a.style.border = 'none'; a.style.visibility = 'hidden'; document.body.appendChild(a); if ('loading' !== document.readyState) c(); else if (window.addEventListener) document.addEventListener('DOMContentLoaded', c); else { var e = document.onreadystatechange || function () { }; document.onreadystatechange = function (b) { e(b); 'loading' !== document.readyState && (document.onreadystatechange = e, c()) } } } })();</script>
+</body>
+
+</html>
